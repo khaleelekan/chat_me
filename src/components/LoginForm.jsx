@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const projectID = '1b7801d6-8a66-4be4-a442-89219d833dfc';
+const projectID = 'a6decea1-f9c9-40eb-b060-10f2ffdb38c5';
 
 const Modal = () => {
   const [username, setUsername] = useState('');
@@ -21,7 +21,7 @@ const Modal = () => {
 
       window.location.reload();
       setError('');
-    } catch (err) {
+    } catch (error) {
       setError('Oops, incorrect credentials.');
     }
   };

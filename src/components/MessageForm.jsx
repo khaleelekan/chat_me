@@ -1,20 +1,18 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { SendOutlined, PictureOutlined } from '@ant-design/icons';
 import { sendMessage, isTyping } from 'react-chat-engine';
 
-const MessageForm = (props) => {
+const MessageForm = ({ chatId, creds }) => {
   const [value, setValue] = useState('');
-  const { chatId, creds } = props;
 
   const handleChange = (event) => {
     setValue(event.target.value);
-
-    isTyping(props, chatId);
+    isTyping({ creds, chatId }); // Passing both creds and chatId
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const text = value.trim();
 
     if (text.length > 0) {
@@ -47,7 +45,7 @@ const MessageForm = (props) => {
         multiple={false}
         id="upload-button"
         style={{ display: 'none' }}
-        onChange={handleUpload.bind(this)}
+        onChange={handleUpload}
       />
       <button type="submit" className="send-button">
         <SendOutlined className="send-icon" />
@@ -56,4 +54,11 @@ const MessageForm = (props) => {
   );
 };
 
+// Adding prop-types validation
+MessageForm.propTypes = {
+  chatId: PropTypes.number.isRequired,
+  creds: PropTypes.object.isRequired
+};
+
 export default MessageForm;
+
